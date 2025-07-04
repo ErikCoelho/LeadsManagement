@@ -30,4 +30,14 @@ public class Lead : Entity
     public string Suburb { get; private set; }   
     public decimal Price { get; private set; }
     public DateTime DataCriacao { get; private set; }
+
+    public void UpdateCategory(ECategoryType category)
+    {
+        Category = category;
+    }
+
+    public void ApplyDiscount(decimal discountPercentage)
+    {
+        Price = Price * (1 - discountPercentage);
+    }
 }
