@@ -23,7 +23,7 @@ public static class DatabaseSeeder
                 "(11) 99999-1111", 
                 "Interessado em apartamento de 2 quartos na Vila Olímpia",
                 "Vila Olímpia", 
-                450000.00m
+                550.00m
             ),
             new Lead(
                 "Maria", 
@@ -32,7 +32,7 @@ public static class DatabaseSeeder
                 "(11) 99999-2222", 
                 "Procura casa com quintal para família grande",
                 "Brooklin", 
-                680000.00m
+                680.00m
             ),
             new Lead(
                 "Pedro", 
@@ -41,30 +41,27 @@ public static class DatabaseSeeder
                 "(11) 99999-3333", 
                 "Investidor interessado em imóveis comerciais",
                 "Faria Lima", 
-                1200000.00m
+                520.00m
             ),
             new Lead(
                 "Ana", 
                 "Oliveira", 
                 "ana.oliveira@email.com", 
                 "(11) 99999-4444", 
-                "Primeira compra, apartamento até R$ 300mil",
+                "Preciso de um chaveiro",
                 "Santo André", 
-                280000.00m
+                28.00m
             ),
             new Lead(
                 "Carlos", 
                 "Ferreira", 
                 "carlos.ferreira@email.com", 
                 "(11) 99999-5555", 
-                "Cobertura com vista para o mar",
+                "Preciso de um pintor",
                 "Santos", 
-                950000.00m
+                12.00m
             )
         };
-
-        leads[1].UpdateCategory(ECategoryType.Accepted);
-
         await context.Leads.AddRangeAsync(leads);
         await context.SaveChangesAsync();
 
