@@ -55,9 +55,9 @@ public class LeadHandler:IHandler<CreateLeadCommand>
             return new GenericCommandResult(false, "Lead não encontrado", string.Empty);
         }
 
-        if(lead.Category == ECategoryType.Accepted)   
+        if(lead.Category != ECategoryType.Waiting)   
         {
-            return new GenericCommandResult(false, "Lead já foi aceito", lead);
+            return new GenericCommandResult(false, "Lead já foi aceito ou recusado", lead);
         }
 
         if (command.Category == ECategoryType.Accepted && lead.Price > 500)
