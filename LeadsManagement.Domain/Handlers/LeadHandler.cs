@@ -12,10 +12,10 @@ namespace LeadsManagement.Domain.Handlers;
 
 public class LeadHandler:IHandler<CreateLeadCommand>
 {
-    private readonly ILeadSqlRepository  _repository;
+    private readonly ILeadRepository  _repository;
     private readonly IEmailService _emailService;
 
-    public LeadHandler(ILeadSqlRepository repository, IEmailService emailService)
+    public LeadHandler(ILeadRepository repository, IEmailService emailService)
     {
         _repository = repository;
         _emailService = emailService;

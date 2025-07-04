@@ -12,14 +12,14 @@ namespace LeadsManagement.Tests.Handlers;
 [TestClass]
 public class LeadHandlerTest
 {
-    private Mock<ILeadSqlRepository> _mockRepository;
+    private Mock<ILeadRepository> _mockRepository;
     private Mock<IEmailService> _mockEmailService;
     private LeadHandler _handler;
 
     [TestInitialize]
     public void Setup()
     {
-        _mockRepository = new Mock<ILeadSqlRepository>();
+        _mockRepository = new Mock<ILeadRepository>();
         _mockEmailService = new Mock<IEmailService>();
         _handler = new LeadHandler(_mockRepository.Object, _mockEmailService.Object);
     }

@@ -5,6 +5,8 @@ namespace LeadsManagement.Domain.Entities;
 
 public class Lead : Entity
 {
+    protected Lead(){}
+
     public Lead(string firstName, string lastName, string email, string phoneNumber, 
         string description, string suburb, decimal price)
     {

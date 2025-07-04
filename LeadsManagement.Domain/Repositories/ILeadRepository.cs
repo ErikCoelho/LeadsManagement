@@ -2,7 +2,7 @@
 
 namespace LeadsManagement.Domain.Repositories;
 
-public interface ILeadSqlRepository
+public interface ILeadRepository
 {
     Task<IEnumerable<Lead>> GetWaitingLeadsAsync(int pageNumber, int pageSize);
     Task<IEnumerable<Lead>> GetAcceptedLeadsAsync(int pageNumber, int pageSize);
