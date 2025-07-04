@@ -1,15 +1,22 @@
+using LeadsManagement.Domain.Handlers;
+using LeadsManagement.Domain.Repositories;
+using LeadsManagement.Domain.Service;
+using LeadsManagement.Infra.Contexts;
+using LeadsManagement.Infra.Respositories;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Database"));
+
+ConfigureServices(builder);
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -23,3 +30,10 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+void ConfigureServices(WebApplicationBuilder builder){
+    builder.Services.AddTransient<ILeadRepository, LeadRepository>();
+    builder.Services.AddTransient<IEmailService, EmailService>();
+    builder.Services.AddTransient<LeadHandler>();
+}
