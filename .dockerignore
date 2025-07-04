@@ -1,0 +1,38 @@
+# .NET
+**/bin/
+**/obj/
+**/out/
+**/.vs/
+**/.vscode/
+**/TestResults/
+**/*.user
+**/*.suo
+**/*.cache
+**/.nuget/
+
+# General
+.git/
+.gitignore
+README.md
+**/*.md
+.env
+.env.local
+.env.production
+.env.staging
+
+# OS
+.DS_Store
+Thumbs.db
+**/*.tmp
+**/*.log
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore 

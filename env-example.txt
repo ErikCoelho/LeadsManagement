@@ -1,0 +1,19 @@
+# Lead Management - Back-end Environment Variables
+# Copie este arquivo para .env e ajuste conforme necessário
+
+# ASP.NET Core Environment
+ASPNETCORE_ENVIRONMENT=Production
+
+# ASP.NET Core URLs
+ASPNETCORE_URLS=http://+:80
+
+# Database Configuration  
+SA_PASSWORD=LeadManagement123!
+ACCEPT_EULA=Y
+MSSQL_PID=Express
+
+# Connection String (usado pela API)
+ConnectionStrings__DefaultConnection=Server=db,1433;Database=LeadManagementDB;User Id=sa;Password=LeadManagement123!;TrustServerCertificate=true;
+
+# CORS Settings (se necessário ajustar)
+# CORS_ORIGINS=http://localhost:4200,https://frontend.exemplo.com 

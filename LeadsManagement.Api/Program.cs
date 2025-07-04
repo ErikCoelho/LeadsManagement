@@ -11,7 +11,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Database"));
+builder.Services.AddDbContext<DataContext>(opt => 
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 ConfigureServices(builder);
 
@@ -22,6 +23,8 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod()
             .AllowAnyHeader());
 });
+
+builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 
@@ -36,6 +39,9 @@ if (app.Environment.IsDevelopment())
 app.UseCors("DevPolicy");
 app.UseHttpsRedirection();
 app.UseAuthorization();
+
+app.MapHealthChecks("/health");
+
 app.MapControllers();
 app.Run();
 
