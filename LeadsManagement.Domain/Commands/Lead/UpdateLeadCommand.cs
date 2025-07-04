@@ -5,7 +5,7 @@ namespace LeadsManagement.Domain.Commands.Lead;
 
 public class UpdateLeadCommand : ICommand
 {
-    public Guid Id { get; set; }
+    public Guid? Id { get; set; }
     public ECategoryType Category { get; set; }
 
     public void Validate()

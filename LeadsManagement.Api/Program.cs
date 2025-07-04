@@ -15,7 +15,17 @@ builder.Services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Datab
 
 ConfigureServices(builder);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("DevPolicy",
+        x => x.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
+
 var app = builder.Build();
+
+await SeedDatabase(app);
 
 if (app.Environment.IsDevelopment())
 {
@@ -23,14 +33,30 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("DevPolicy");
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
 
+
+async Task SeedDatabase(WebApplication app)
+{
+    using var scope = app.Services.CreateScope();
+    var services = scope.ServiceProvider;
+    
+    try
+    {
+        var context = services.GetRequiredService<DataContext>();
+        await context.Database.EnsureCreatedAsync();
+        await LeadsManagement.Infra.Seed.DatabaseSeeder.SeedAsync(context);
+        Console.WriteLine("Database initialization completed successfully!");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"An error occurred while seeding the database: {ex.Message}");
+    }
+}
 
 void ConfigureServices(WebApplicationBuilder builder){
     builder.Services.AddTransient<ILeadRepository, LeadRepository>();

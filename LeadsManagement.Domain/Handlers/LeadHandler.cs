@@ -48,16 +48,23 @@ public class LeadHandler:IHandler<CreateLeadCommand>
             return new GenericCommandResult(false, ex.Message, string.Empty);
         }
 
-        var lead = await _repository.GetByIdAsync(command.Id);
+        var lead = await _repository.GetByIdAsync(command.Id!.Value);
+        
         if (lead == null)
         {
             return new GenericCommandResult(false, "Lead não encontrado", string.Empty);
         }
 
+        if(lead.Category == ECategoryType.Accepted)   
+        {
+            return new GenericCommandResult(false, "Lead já foi aceito", lead);
+        }
+
         if (command.Category == ECategoryType.Accepted && lead.Price > 500)
         {
             lead.ApplyDiscount(0.10m);
-        }   
+        }
+
 
         lead.UpdateCategory(command.Category);
 

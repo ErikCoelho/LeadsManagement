@@ -12,9 +12,9 @@ public class LeadController: ControllerBase
 {
     [HttpGet("v1/leads/accepted")]
     public async Task<IEnumerable<Lead>> GetAcceptedLeads(
-        [FromQuery] int pageNumber, 
-        [FromQuery] int pageSize, 
-        [FromServices] ILeadRepository leadRepository)
+        [FromServices] ILeadRepository leadRepository,
+        [FromQuery] int pageNumber = 1, 
+        [FromQuery] int pageSize = 5)
     {
         var leads = await leadRepository.GetAcceptedLeadsAsync(pageNumber, pageSize);
         return leads;
@@ -22,9 +22,9 @@ public class LeadController: ControllerBase
 
     [HttpGet("v1/leads/waiting")]
     public async Task<IEnumerable<Lead>> GetWaitingLeads(
-        [FromQuery] int pageNumber, 
-        [FromQuery] int pageSize, 
-        [FromServices] ILeadRepository leadRepository)
+        [FromServices] ILeadRepository leadRepository,
+        [FromQuery] int pageNumber = 1, 
+        [FromQuery] int pageSize = 5)
     {
         var leads = await leadRepository.GetWaitingLeadsAsync(pageNumber, pageSize);
         return leads;
